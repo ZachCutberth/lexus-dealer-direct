@@ -47,28 +47,18 @@ def scrapeWebsite():
     # Set seach criteria through dropdown menus.
     distance = Select(browser.find_element_by_id('bodyView:searchResultsTable:searchResultsDataTableForm:searchResults:location'))
     distance.select_by_value('< 1,000 mi')
-    #time.sleep(10)
     perPage = Select(browser.find_element_by_id('bodyView:searchResultsTable:searchResultsDataTableForm:pagination2:resultsPerPageSelector'))
     perPage.select_by_value('50')
-    #time.sleep(30)
 
     element = WebDriverWait(driver, 10).until(
         EC.invisibility_of_element_located((By.ID, 'button'))
 
-    #for attempt in range(10):
-        #try:
-            # Find the table cell that has the car name and VIN.
+    # Find the table cell that has the car name and VIN.
     cars = browser.find_elements_by_xpath('//td[strong]')
-        #except StaleElementReferenceException:
-        #   time.sleep(5)
 
     # Loop through cars and append them to carList.
     for car in cars:
-        #try:
        carList.append(car.text)
-        #except:
-        #    cars = browser.find_elements_by_xpath('//td[strong]')
-
 
     # Click the next results page button.
     try:
@@ -77,19 +67,12 @@ def scrapeWebsite():
     except:
         pass
 
-    #for attempt in range(10):
-        #try:
-            # Find the table cell that has the car name and VIN.
+    # Find the table cell that has the car name and VIN.
     cars = browser.find_elements_by_xpath('//td[strong]')
-        #except StaleElementReferenceException:
-            #time.sleep(5)
-
+      
     # Loop through cars and append them to carList.
     for car in cars:
-        #try:
         carList.append(car.text)
-        #except:
-        #    cars = browser.find_elements_by_xpath('//td[strong]')
 
     print(carList)
 
@@ -111,12 +94,7 @@ def scrapeWebsite():
 
     time.sleep(5)
     # Go back to the Buy Direct Online page so that when the scrape function restarts we get new results.
-    #try:
     browser.find_element_by_id('ddonline2').click()
-    #except:
-    #    browser.find_element_by_id('ddonline').click()
-
-    #time.sleep(10)
 
 # Keep scraping the website as long as the user is logged in. If not log in the user and restart loop.
 def scrapeWebsiteLoop():
